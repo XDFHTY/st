@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cj.stshentu.mapper.WrongMsgMapper" >
+  <resultMap id="BaseResultMap" type="com.cj.stshentu.entity.WrongMsg" >
+    <id column="wrong_id" property="wrongId" jdbcType="BIGINT" />
+    <result column="req_id" property="reqId" jdbcType="BIGINT" />
+    <result column="loop_num" property="loopNum" jdbcType="INTEGER" />
+    <result column="ret_num" property="retNum" jdbcType="CHAR" />
+    <result column="wrong_msg" property="wrongMsg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    wrong_id, req_id, loop_num, ret_num, wrong_msg
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from wrong_msg
+    where wrong_id = #{wrongId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from wrong_msg
+    where wrong_id = #{wrongId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cj.stshentu.entity.WrongMsg" >
+    insert into wrong_msg (wrong_id, req_id, loop_num, 
+      ret_num, wrong_msg)
+    values (#{wrongId,jdbcType=BIGINT}, #{reqId,jdbcType=BIGINT}, #{loopNum,jdbcType=INTEGER}, 
+      #{retNum,jdbcType=CHAR}, #{wrongMsg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cj.stshentu.entity.WrongMsg" >
+    insert into wrong_msg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wrongId != null" >
+        wrong_id,
+      </if>
+      <if test="reqId != null" >
+        req_id,
+      </if>
+      <if test="loopNum != null" >
+        loop_num,
+      </if>
+      <if test="retNum != null" >
+        ret_num,
+      </if>
+      <if test="wrongMsg != null" >
+        wrong_msg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wrongId != null" >
+        #{wrongId,jdbcType=BIGINT},
+      </if>
+      <if test="reqId != null" >
+        #{reqId,jdbcType=BIGINT},
+      </if>
+      <if test="loopNum != null" >
+        #{loopNum,jdbcType=INTEGER},
+      </if>
+      <if test="retNum != null" >
+        #{retNum,jdbcType=CHAR},
+      </if>
+      <if test="wrongMsg != null" >
+        #{wrongMsg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cj.stshentu.entity.WrongMsg" >
+    update wrong_msg
+    <set >
+      <if test="reqId != null" >
+        req_id = #{reqId,jdbcType=BIGINT},
+      </if>
+      <if test="loopNum != null" >
+        loop_num = #{loopNum,jdbcType=INTEGER},
+      </if>
+      <if test="retNum != null" >
+        ret_num = #{retNum,jdbcType=CHAR},
+      </if>
+      <if test="wrongMsg != null" >
+        wrong_msg = #{wrongMsg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where wrong_id = #{wrongId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cj.stshentu.entity.WrongMsg" >
+    update wrong_msg
+    set req_id = #{reqId,jdbcType=BIGINT},
+      loop_num = #{loopNum,jdbcType=INTEGER},
+      ret_num = #{retNum,jdbcType=CHAR},
+      wrong_msg = #{wrongMsg,jdbcType=VARCHAR}
+    where wrong_id = #{wrongId,jdbcType=BIGINT}
+  </update>
+</mapper>
